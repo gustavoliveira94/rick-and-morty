@@ -1,21 +1,32 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+interface Character {
+  characters: {
+    id: '1';
+    name: 'Rick Sanchez';
+    status: 'Alive';
+    species: 'Human';
+    type: '';
+    gender: 'Male';
+  };
+}
+
 interface CharactersinitialState {
-  projectIssues: string[];
+  characters: Character[];
 }
 
 const initialState: CharactersinitialState = {
-  projectIssues: [],
+  characters: [],
 };
 
 export const charactersSlice = createSlice({
   name: 'characters',
   initialState,
   reducers: {
-    getCharacters: (state, action: PayloadAction<string>) => {
+    getCharacters: (state, action: PayloadAction<any>) => {
       return {
         ...state,
-        projectIssues: [...state.projectIssues, action.payload],
+        characters: [...state.characters, action.payload],
       };
     },
   },
