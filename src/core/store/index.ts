@@ -1,0 +1,1 @@
+export { charactersSlice } from './characters';
