@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import { ProviderStore } from 'core/providers/store';
 import { ProviderGraphql } from 'core/providers/graphql';
+import { GlobalStyles } from 'config/styles';
 
-import App from './App';
+import Routes from 'presentation/routes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -11,8 +13,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ProviderGraphql>
-      <App />
-    </ProviderGraphql>
+    <GlobalStyles />
+    <ProviderStore>
+      <ProviderGraphql>
+        <Routes />
+      </ProviderGraphql>
+    </ProviderStore>
   </React.StrictMode>,
 );
