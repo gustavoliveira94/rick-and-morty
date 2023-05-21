@@ -3,19 +3,19 @@ import { useEffect } from 'react';
 import { ICharacter } from 'contracts/character';
 import {
   CharactersinitialState,
-  charactersSelector,
-  getCharacters,
+  characterFilterSelector,
+  filterCharacter,
 } from 'core/store/characters';
 import { graphql } from 'config/graphql';
 
 import { useDispatch } from './useDispatch';
 import { useSelector } from './useSelector';
 
-import { useQuery } from './useQuery';
+import { useLazyQuery } from './useLazyQuery';
 
-const CHARACTERS_QUERY = graphql`
-  query {
-    characters {
+const CHARACTER_FILTER_QUERY = graphql`
+  query ($name: String!) {
+    characters(filter: { name: $name }) {
       info {
         count
         pages
@@ -34,7 +34,7 @@ const CHARACTERS_QUERY = graphql`
   }
 `;
 
-interface IUseCharacters {
+interface IUseCharacterFilter {
   characters: {
     info: {
       count: number;
@@ -46,20 +46,24 @@ interface IUseCharacters {
   };
 }
 
-export const useCharacters = () => {
-  const { data, loading } = useQuery<IUseCharacters>(CHARACTERS_QUERY);
+export const useFilterCharacter = () => {
   const { dispatch } = useDispatch();
-  const { data: characters } =
-    useSelector<CharactersinitialState['characters']>(charactersSelector);
+  const { data, setQuery, loading } = useLazyQuery<IUseCharacterFilter>(
+    CHARACTER_FILTER_QUERY,
+  );
+  const { data: characters } = useSelector<
+    CharactersinitialState['filterCharacter']
+  >(characterFilterSelector);
 
   useEffect(() => {
     if (data?.characters?.results) {
-      dispatch(getCharacters(data?.characters?.results));
+      dispatch(filterCharacter(data?.characters?.results));
     }
   }, [data?.characters?.results]);
 
   return {
     data: characters,
+    filterCharacter: (name: string) => setQuery({ variables: { name } }),
     loading,
   };
 };

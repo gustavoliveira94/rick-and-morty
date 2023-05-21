@@ -7,8 +7,11 @@ export const Navbar = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 80px;
 
-  img {
+  .logo {
+    position: absolute;
+    left: 60px;
     width: 180px;
   }
 `;

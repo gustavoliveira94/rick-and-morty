@@ -6,14 +6,14 @@ export const Card = styled.div`
   height: 150px;
   background-color: #feda79;
   margin-top: 20px;
-  border-radius: 10px;
+  border-radius: 8px;
   color: #712512;
   margin-right: 20px;
 
   img {
     width: 150px;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
   }
 `;
 

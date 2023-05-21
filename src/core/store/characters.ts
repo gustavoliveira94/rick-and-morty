@@ -6,10 +6,14 @@ import { ICharacter } from 'contracts/character';
 
 export interface CharactersinitialState {
   characters: ICharacter[];
+  filterCharacter: ICharacter[];
+  favorites: ICharacter[];
 }
 
 const initialState: CharactersinitialState = {
   characters: [],
+  favorites: [],
+  filterCharacter: [],
 };
 
 export const charactersSlice = createSlice({
@@ -22,8 +26,18 @@ export const charactersSlice = createSlice({
         characters: action.payload,
       };
     },
+    filterCharacter: (state, action: PayloadAction<ICharacter[]>) => {
+      return {
+        ...state,
+        filterCharacter: action.payload,
+      };
+    },
   },
 });
 
-export const charactersSelector = (state: RootState) => state.characters;
-export const { getCharacters } = charactersSlice.actions;
+export const charactersSelector = (state: RootState) =>
+  state.characters.characters;
+export const characterFilterSelector = (state: RootState) =>
+  state.characters.filterCharacter;
+
+export const { getCharacters, filterCharacter } = charactersSlice.actions;
