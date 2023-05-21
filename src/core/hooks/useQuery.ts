@@ -9,7 +9,7 @@ export const useQuery = <TData = any>(
   options?: IUseQuery,
 ) => {
   const { data, loading } = useQueries<TData>(query, {
-    variables: options?.variables,
+    ...options,
   });
 
   return {
