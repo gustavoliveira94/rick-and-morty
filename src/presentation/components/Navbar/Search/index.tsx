@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import searchButton from 'presentation/assets/search.png';
-
 import { useFilterCharacter } from 'core/hooks/useFilterCharacter';
 
 import * as Styles from './styles';
@@ -19,7 +17,7 @@ export const Search: React.FC = () => {
           onChange={(e) => setName(e.target.value)}
         />
         <button type="button" onClick={() => filterCharacter(name)}>
-          <img src={searchButton} alt="button-search" />
+          <i className="fa-solid fa-magnifying-glass" />
         </button>
       </Styles.Search>
     </Styles.ContentSearch>

@@ -30,6 +30,11 @@ export const Search = styled.div`
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    i {
+      font-size: 18px;
+    }
 
     img {
       width: 45px;
