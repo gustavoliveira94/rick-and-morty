@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useSetFavoriteCharacter } from 'core/hooks/useSetFavoriteCharacter';
 
 import * as Styles from './styles';
 
@@ -9,40 +8,31 @@ interface CardProps {
   gender: string;
   status: string;
   species: string;
-  id: string;
+  isFavorite: boolean;
+  setFavorite: () => void;
 }
 
 export const Card: React.FC<CardProps> = ({
-  id,
   image,
   name,
   gender,
   species,
   status,
+  isFavorite,
+  setFavorite,
 }) => {
-  const { favoriteCharacters, setFavoriteCharacter } =
-    useSetFavoriteCharacter();
-
-  const setFavorite = () => {
-    const isFavorite = favoriteCharacters?.some((favorite) => favorite === id);
-
+  const favorite = () => {
     return isFavorite ? (
-      <i
-        className="fa-solid fa-heart"
-        onClick={() => setFavoriteCharacter(id)}
-      />
+      <i className="fa-solid fa-heart" onClick={() => setFavorite()} />
     ) : (
-      <i
-        className="fa-regular fa-heart"
-        onClick={() => setFavoriteCharacter(id)}
-      />
+      <i className="fa-regular fa-heart" onClick={() => setFavorite()} />
     );
   };
 
   return (
     <Styles.Card>
-      <img src={image} alt="character" />
-      {setFavorite()}
+      <img src={image} alt="character" loading="lazy" />
+      {favorite()}
       <Styles.Infos>
         <p title={name}>{name}</p>
         <small>Gender: {gender}</small>

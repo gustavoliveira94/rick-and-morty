@@ -4,18 +4,20 @@ import { ICharacter } from 'contracts/character';
 import {
   CharactersinitialState,
   charactersSelector,
+  filterNameCharacterSelector,
   getCharacters,
+  setFilterName,
 } from 'core/store/characters';
 import { graphql } from 'config/graphql';
 
 import { useDispatch } from './useDispatch';
 import { useSelector } from './useSelector';
 
-import { useQuery } from './useQuery';
+import { useLazyQuery } from './useLazyQuery';
 
 const CHARACTERS_QUERY = graphql`
-  query {
-    characters {
+  query ($page: Int, $filter: FilterCharacter) {
+    characters(page: $page, filter: $filter) {
       info {
         count
         pages
@@ -47,10 +49,21 @@ interface IUseCharacters {
 }
 
 export const useCharacters = () => {
-  const { data, loading } = useQuery<IUseCharacters>(CHARACTERS_QUERY);
   const dispatch = useDispatch();
+
+  const { data, loading, setQuery } =
+    useLazyQuery<IUseCharacters>(CHARACTERS_QUERY);
+
   const { data: characters } =
     useSelector<CharactersinitialState['characters']>(charactersSelector);
+
+  const { data: filterName } = useSelector<
+    CharactersinitialState['filterName']
+  >(filterNameCharacterSelector);
+
+  useEffect(() => {
+    setQuery();
+  }, []);
 
   useEffect(() => {
     if (data?.characters?.results) {
@@ -58,8 +71,20 @@ export const useCharacters = () => {
     }
   }, [data?.characters?.results]);
 
+  const handleFilterName = ({ name }: { name: string }) => {
+    dispatch(setFilterName(name));
+    setQuery({ variables: { filter: { name } } });
+  };
+
+  const handlePagination = ({ page }: { page?: number }) => {
+    setQuery({ variables: { page, filter: { name: filterName } } });
+  };
+
   return {
     data: characters,
+    pagination: data?.characters.info,
     loading,
+    handleFilterName,
+    handlePagination,
   };
 };

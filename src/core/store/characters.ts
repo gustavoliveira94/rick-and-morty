@@ -6,43 +6,32 @@ import { ICharacter } from 'contracts/character';
 
 export interface CharactersinitialState {
   characters: ICharacter[];
-  filterCharacter: ICharacter[];
   favoritesIds: string[];
   favoriteCharacters: ICharacter[];
-  isFiltered: boolean;
+  filterName: string;
 }
 
 const initialState: CharactersinitialState = {
   characters: [],
   favoritesIds: JSON.parse(localStorage.getItem('favorites')!) || [],
-  filterCharacter: [],
   favoriteCharacters: [],
-  isFiltered: false,
+  filterName: '',
 };
 
 export const charactersSlice = createSlice({
   name: 'characters',
   initialState,
   reducers: {
+    setFilterName: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        filterName: action.payload,
+      };
+    },
     getCharacters: (state, action: PayloadAction<ICharacter[]>) => {
       return {
         ...state,
         characters: action.payload,
-      };
-    },
-    filterCharacter: (state, action: PayloadAction<ICharacter[]>) => {
-      if (!action.payload.length) {
-        return {
-          ...state,
-          filterCharacter: action.payload,
-          isFiltered: false,
-        };
-      }
-
-      return {
-        ...state,
-        filterCharacter: action.payload,
-        isFiltered: true,
       };
     },
     getFavoriteCharacter: (state, action: PayloadAction<ICharacter[]>) => {
@@ -84,18 +73,16 @@ export const charactersSlice = createSlice({
 
 export const charactersSelector = (state: RootState) =>
   state.characters.characters;
-export const characterFilterSelector = (state: RootState) => ({
-  filterCharacter: state.characters.filterCharacter,
-  isFiltered: state.characters.isFiltered,
-});
 export const charactersIdFavoriteSelector = (state: RootState) =>
   state.characters.favoritesIds;
 export const charactersFavoriteSelector = (state: RootState) =>
   state.characters.favoriteCharacters;
+export const filterNameCharacterSelector = (state: RootState) =>
+  state.characters.filterName;
 
 export const {
   getCharacters,
-  filterCharacter,
   setfavoriteCharacter,
   getFavoriteCharacter,
+  setFilterName,
 } = charactersSlice.actions;
