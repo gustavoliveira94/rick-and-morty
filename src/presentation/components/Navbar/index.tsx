@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import logo from 'presentation/assets/logo-white.webp';
 
 import { Search } from './Search';
@@ -9,6 +11,14 @@ export const Navbar: React.FC = () => {
     <Styles.Navbar>
       <img className="logo" src={logo} alt="logo" />
       <Search />
+      <Styles.Links>
+        <Link to="/">
+          <p>Home</p>
+        </Link>
+        <Link to="/favorites">
+          <p>Favorites</p>
+        </Link>
+      </Styles.Links>
     </Styles.Navbar>
   );
 };

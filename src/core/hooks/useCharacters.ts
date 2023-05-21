@@ -48,7 +48,7 @@ interface IUseCharacters {
 
 export const useCharacters = () => {
   const { data, loading } = useQuery<IUseCharacters>(CHARACTERS_QUERY);
-  const { dispatch } = useDispatch();
+  const dispatch = useDispatch();
   const { data: characters } =
     useSelector<CharactersinitialState['characters']>(charactersSelector);
 

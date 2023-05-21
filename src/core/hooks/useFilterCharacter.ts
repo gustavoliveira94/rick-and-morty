@@ -47,7 +47,7 @@ interface IUseCharacterFilter {
 }
 
 export const useFilterCharacter = () => {
-  const { dispatch } = useDispatch();
+  const dispatch = useDispatch();
   const { data, setQuery, loading } = useLazyQuery<IUseCharacterFilter>(
     CHARACTER_FILTER_QUERY,
   );

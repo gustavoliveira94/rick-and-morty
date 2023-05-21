@@ -3,7 +3,7 @@ import { Route, BrowserRouter, Routes as Switch } from 'react-router-dom';
 
 import { Layout } from 'presentation/layout';
 
-import { Home } from 'presentation/pages';
+import { Home, Favorites } from 'presentation/pages';
 
 const Routes: React.FC = () => {
   return (
@@ -11,6 +11,7 @@ const Routes: React.FC = () => {
       <Layout>
         <Switch>
           <Route element={<Home />} path="/*" />
+          <Route element={<Favorites />} path="/favorites" />
         </Switch>
       </Layout>
     </BrowserRouter>

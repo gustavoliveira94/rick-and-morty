@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
+  position: relative;
   display: flex;
   width: 380px;
   height: 150px;
@@ -9,6 +10,13 @@ export const Card = styled.div`
   border-radius: 8px;
   color: #712512;
   margin-right: 20px;
+
+  i {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+  }
 
   img {
     width: 150px;
@@ -27,6 +35,10 @@ export const Infos = styled.div`
     font-family: 'Creepster', cursive;
     text-decoration: underline;
     margin-bottom: 30px;
+    width: 180px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   small {

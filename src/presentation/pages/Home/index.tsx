@@ -20,16 +20,19 @@ export const Home: React.FC = () => {
       {loading
         ? 'Loading...'
         : charactersData?.map(
-            ({ image, name, id, species, gender, status }) => (
-              <Card
-                key={id}
-                image={image}
-                name={name}
-                species={species}
-                gender={gender}
-                status={status}
-              />
-            ),
+            ({ image, name, id, species, gender, status }) => {
+              return (
+                <Card
+                  key={id}
+                  id={id}
+                  image={image}
+                  name={name}
+                  species={species}
+                  gender={gender}
+                  status={status}
+                />
+              );
+            },
           )}
     </Styles.List>
   );
