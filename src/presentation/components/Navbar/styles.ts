@@ -23,5 +23,9 @@ export const Links = styled.div`
     text-decoration: underline;
     color: #fff;
     margin-right: 15px;
+
+    p {
+      font-family: 'Creepster', cursive;
+    }
   }
 `;

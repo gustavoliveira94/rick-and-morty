@@ -9,6 +9,7 @@ export interface CharactersinitialState {
   filterCharacter: ICharacter[];
   favoritesIds: string[];
   favoriteCharacters: ICharacter[];
+  isFiltered: boolean;
 }
 
 const initialState: CharactersinitialState = {
@@ -16,6 +17,7 @@ const initialState: CharactersinitialState = {
   favoritesIds: JSON.parse(localStorage.getItem('favorites')!) || [],
   filterCharacter: [],
   favoriteCharacters: [],
+  isFiltered: false,
 };
 
 export const charactersSlice = createSlice({
@@ -29,9 +31,18 @@ export const charactersSlice = createSlice({
       };
     },
     filterCharacter: (state, action: PayloadAction<ICharacter[]>) => {
+      if (!action.payload.length) {
+        return {
+          ...state,
+          filterCharacter: action.payload,
+          isFiltered: false,
+        };
+      }
+
       return {
         ...state,
         filterCharacter: action.payload,
+        isFiltered: true,
       };
     },
     getFavoriteCharacter: (state, action: PayloadAction<ICharacter[]>) => {
@@ -73,8 +84,10 @@ export const charactersSlice = createSlice({
 
 export const charactersSelector = (state: RootState) =>
   state.characters.characters;
-export const characterFilterSelector = (state: RootState) =>
-  state.characters.filterCharacter;
+export const characterFilterSelector = (state: RootState) => ({
+  filterCharacter: state.characters.filterCharacter,
+  isFiltered: state.characters.isFiltered,
+});
 export const charactersIdFavoriteSelector = (state: RootState) =>
   state.characters.favoritesIds;
 export const charactersFavoriteSelector = (state: RootState) =>

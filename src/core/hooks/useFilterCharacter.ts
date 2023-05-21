@@ -51,9 +51,9 @@ export const useFilterCharacter = () => {
   const { data, setQuery, loading } = useLazyQuery<IUseCharacterFilter>(
     CHARACTER_FILTER_QUERY,
   );
-  const { data: characters } = useSelector<
-    CharactersinitialState['filterCharacter']
-  >(characterFilterSelector);
+  const {
+    data: { filterCharacter: characters, isFiltered },
+  } = useSelector<CharactersinitialState>(characterFilterSelector);
 
   useEffect(() => {
     if (data?.characters?.results) {
@@ -61,9 +61,15 @@ export const useFilterCharacter = () => {
     }
   }, [data?.characters?.results]);
 
+  const removeFilter = () => {
+    dispatch(filterCharacter([]));
+  };
+
   return {
     data: characters,
     filterCharacter: (name: string) => setQuery({ variables: { name } }),
     loading,
+    isFiltered,
+    removeFilter,
   };
 };

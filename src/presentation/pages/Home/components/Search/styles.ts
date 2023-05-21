@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const ContentSearch = styled.div`
-  width: calc(100% - 180px);
-  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 40px;
 `;
 
 export const Search = styled.div`
