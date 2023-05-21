@@ -1,21 +1,25 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useState } from 'react';
-
-import { useFilterCharacter } from 'core/hooks/useFilterCharacter';
 
 import * as Styles from './styles';
 
-export const Search: React.FC = () => {
-  const { filterCharacter, isFiltered, removeFilter } = useFilterCharacter();
+interface SearchProps {
+  setFilter: ({ name }: { name: string }) => void;
+}
 
+export const Search: React.FC<SearchProps> = ({ setFilter }) => {
   const [name, setName] = useState('');
+  const [searching, setSearching] = useState(false);
 
   const handleFilter = () => {
-    if (!isFiltered) {
-      return filterCharacter(name);
-    }
+    setFilter({ name });
+    setSearching(true);
+  };
 
+  const clearFilter = () => {
+    setFilter({ name: '' });
+    setSearching(false);
     setName('');
-    removeFilter();
   };
 
   return (
@@ -26,14 +30,18 @@ export const Search: React.FC = () => {
           onChange={(e) => setName(e.target.value)}
           value={name}
         />
-        <button type="button" onClick={() => handleFilter()}>
-          {!isFiltered ? (
-            <i className="fa-solid fa-magnifying-glass" />
-          ) : (
-            <i className="fa-regular fa-circle-xmark" />
-          )}
+        <button type="button">
+          <i
+            className="fa-solid fa-magnifying-glass"
+            onClick={() => handleFilter()}
+          />
         </button>
       </Styles.Search>
+      {searching ? (
+        <Styles.Clear type="button" onClick={() => clearFilter()}>
+          Limpar Filtro
+        </Styles.Clear>
+      ) : null}
     </Styles.ContentSearch>
   );
 };

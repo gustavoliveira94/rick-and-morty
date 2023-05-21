@@ -41,3 +41,12 @@ export const Search = styled.div`
     }
   }
 `;
+
+export const Clear = styled.button`
+  background-color: transparent;
+  border: none;
+  font-family: 'Creepster', cursive;
+  text-decoration: underline;
+  margin-left: 20px;
+  cursor: pointer;
+`;
