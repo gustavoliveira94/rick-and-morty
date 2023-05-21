@@ -15,3 +15,13 @@ export const Navbar = styled.div`
     width: 180px;
   }
 `;
+
+export const Links = styled.div`
+  display: flex;
+
+  a {
+    text-decoration: underline;
+    color: #fff;
+    margin-right: 15px;
+  }
+`;

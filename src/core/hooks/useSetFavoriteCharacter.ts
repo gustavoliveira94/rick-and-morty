@@ -1,19 +1,19 @@
 import {
-  charactersFavoriteSelector,
-  favoriteCharacter as favorite,
+  charactersIdFavoriteSelector,
+  setfavoriteCharacter as setFavorite,
 } from 'core/store/characters';
 
 import { useDispatch } from './useDispatch';
 import { useSelector } from './useSelector';
 
-export const useFavoriteCharacter = () => {
+export const useSetFavoriteCharacter = () => {
   const dispatch = useDispatch();
   const { data: favoriteCharacters } = useSelector<string[]>(
-    charactersFavoriteSelector,
+    charactersIdFavoriteSelector,
   );
 
   const setFavoriteCharacter = (id: string) => {
-    dispatch(favorite(id));
+    dispatch(setFavorite(id));
   };
 
   return {

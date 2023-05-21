@@ -7,13 +7,15 @@ import { ICharacter } from 'contracts/character';
 export interface CharactersinitialState {
   characters: ICharacter[];
   filterCharacter: ICharacter[];
-  favorites: string[];
+  favoritesIds: string[];
+  favoriteCharacters: ICharacter[];
 }
 
 const initialState: CharactersinitialState = {
   characters: [],
-  favorites: JSON.parse(localStorage.getItem('favorites')!) || [],
+  favoritesIds: JSON.parse(localStorage.getItem('favorites')!) || [],
   filterCharacter: [],
+  favoriteCharacters: [],
 };
 
 export const charactersSlice = createSlice({
@@ -32,13 +34,19 @@ export const charactersSlice = createSlice({
         filterCharacter: action.payload,
       };
     },
-    favoriteCharacter: (state, action: PayloadAction<string>) => {
-      const alreadyExist = state.favorites.some(
+    getFavoriteCharacter: (state, action: PayloadAction<ICharacter[]>) => {
+      return {
+        ...state,
+        favoriteCharacters: action.payload,
+      };
+    },
+    setfavoriteCharacter: (state, action: PayloadAction<string>) => {
+      const alreadyExist = state.favoritesIds.some(
         (favorite) => favorite === action.payload,
       );
 
       if (alreadyExist) {
-        const favorites = state.favorites.filter(
+        const favorites = state.favoritesIds.filter(
           (favorite) => favorite !== action.payload,
         );
 
@@ -46,18 +54,18 @@ export const charactersSlice = createSlice({
 
         return {
           ...state,
-          favorites: [...favorites],
+          favoritesIds: [...favorites],
         };
       }
 
       localStorage.setItem(
         'favorites',
-        JSON.stringify([...state.favorites, action.payload]),
+        JSON.stringify([...state.favoritesIds, action.payload]),
       );
 
       return {
         ...state,
-        favorites: [...state.favorites, action.payload],
+        favoritesIds: [...state.favoritesIds, action.payload],
       };
     },
   },
@@ -67,8 +75,14 @@ export const charactersSelector = (state: RootState) =>
   state.characters.characters;
 export const characterFilterSelector = (state: RootState) =>
   state.characters.filterCharacter;
+export const charactersIdFavoriteSelector = (state: RootState) =>
+  state.characters.favoritesIds;
 export const charactersFavoriteSelector = (state: RootState) =>
-  state.characters.favorites;
+  state.characters.favoriteCharacters;
 
-export const { getCharacters, filterCharacter, favoriteCharacter } =
-  charactersSlice.actions;
+export const {
+  getCharacters,
+  filterCharacter,
+  setfavoriteCharacter,
+  getFavoriteCharacter,
+} = charactersSlice.actions;
