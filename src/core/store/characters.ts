@@ -1,18 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Character {
-  characters: {
-    id: '1';
-    name: 'Rick Sanchez';
-    status: 'Alive';
-    species: 'Human';
-    type: '';
-    gender: 'Male';
-  };
-}
+import { RootState } from 'config/store';
 
-interface CharactersinitialState {
-  characters: Character[];
+import { ICharacter } from 'contracts/character';
+
+export interface CharactersinitialState {
+  characters: ICharacter[];
 }
 
 const initialState: CharactersinitialState = {
@@ -23,13 +16,14 @@ export const charactersSlice = createSlice({
   name: 'characters',
   initialState,
   reducers: {
-    getCharacters: (state, action: PayloadAction<any>) => {
+    getCharacters: (state, action: PayloadAction<ICharacter[]>) => {
       return {
         ...state,
-        characters: [...state.characters, action.payload],
+        characters: action.payload,
       };
     },
   },
 });
 
+export const charactersSelector = (state: RootState) => state.characters;
 export const { getCharacters } = charactersSlice.actions;
