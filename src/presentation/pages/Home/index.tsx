@@ -1,10 +1,9 @@
-import { Card } from 'presentation/components/Card';
+import { Card, Pagination } from 'presentation/components';
 import { Search } from 'presentation/pages/Home/components/Search';
 
 import { useCharacters } from 'core/hooks/useCharacters';
 import { useSetFavoriteCharacter } from 'core/hooks/useSetFavoriteCharacter';
-
-import { Pagination } from 'presentation/components/Pagination';
+import { isFavorite } from 'core/utils/isFavorite';
 
 import * as Styles from './styles';
 
@@ -16,6 +15,7 @@ export const Home: React.FC = () => {
     handleFilterName,
     handlePagination,
   } = useCharacters();
+
   const { favoriteCharacters, setFavoriteCharacter } =
     useSetFavoriteCharacter();
 
@@ -26,10 +26,6 @@ export const Home: React.FC = () => {
         {loading
           ? 'Loading...'
           : characters?.map(({ image, name, id, species, gender, status }) => {
-              const isFavorite = favoriteCharacters?.some(
-                (favorite) => favorite === id,
-              );
-
               return (
                 <Card
                   key={id}
@@ -38,7 +34,7 @@ export const Home: React.FC = () => {
                   species={species}
                   gender={gender}
                   status={status}
-                  isFavorite={isFavorite}
+                  isFavorite={isFavorite({ favoriteCharacters, id })}
                   setFavorite={() => setFavoriteCharacter(id)}
                 />
               );
