@@ -23,7 +23,7 @@ App to see characters from Rick and Morty and add in your favorites: [Rick and M
 - [React](https://reactjs.org/)
 - [Styled-components](https://styled-components.com/)
 - [Redux](https://redux-toolkit.js.org/tutorials/typescript)
-- [Apollo]([https://redux-toolkit.js.org/tutorials/typescript](https://www.apollographql.com/docs/react/))
+- [Apollo](https://www.apollographql.com/docs/react/)
 
 ## Structure folders
 
