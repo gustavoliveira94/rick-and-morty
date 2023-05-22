@@ -3,6 +3,7 @@
 ## Description
 
 App to see characters from Rick and Morty and add in your favorites: [Rick and Morty Api]([https://pokeapi.co/](https://rickandmortyapi.com/graphql))
+[Project URL](https://rick-and-morty-indol-six.vercel.app/)
 
 ## Running the app
 
