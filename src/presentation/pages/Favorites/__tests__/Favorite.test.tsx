@@ -41,6 +41,15 @@ describe('Testing <Favorites /> Page', () => {
     expect(setFavoriteCharacter).toBeCalledTimes(1);
   });
 
+  it('Should render not found', () => {
+    charactersData = [];
+    loading = false;
+
+    const { getByText } = render(<Favorites />);
+
+    expect(getByText("You don't have favorite characters")).toBeInTheDocument();
+  });
+
   it('Should render characters', () => {
     charactersData = [];
     loading = true;

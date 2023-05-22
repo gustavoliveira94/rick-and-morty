@@ -41,6 +41,15 @@ describe('Testing <Home /> Page', () => {
     expect(setFavoriteCharacter).toBeCalledTimes(1);
   });
 
+  it('Should render not found', () => {
+    charactersData = [];
+    loading = false;
+
+    const { getByText } = render(<Home />);
+
+    expect(getByText('Character not found!')).toBeInTheDocument();
+  });
+
   it('Should render loading', () => {
     charactersData = [];
     loading = true;
