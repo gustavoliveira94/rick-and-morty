@@ -5,6 +5,8 @@ export const ContentSearch = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  margin: auto;
   margin-top: 40px;
 `;
 
@@ -20,6 +22,10 @@ export const Search = styled.div`
     height: 50px;
     border: 0;
     background-color: transparent;
+
+    @media (max-width: 600px) {
+      width: 280px;
+    }
   }
 
   button {
@@ -49,4 +55,9 @@ export const Clear = styled.button`
   text-decoration: underline;
   margin-left: 20px;
   cursor: pointer;
+  margin: 15px 0 0 340px;
+
+  @media (max-width: 600px) {
+    margin-left: 270px;
+  }
 `;

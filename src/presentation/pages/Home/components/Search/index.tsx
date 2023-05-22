@@ -30,15 +30,21 @@ export const Search: React.FC<SearchProps> = ({ setFilter }) => {
           onChange={(e) => setName(e.target.value)}
           value={name}
         />
-        <button type="button">
-          <i
-            className="fa-solid fa-magnifying-glass"
-            onClick={() => handleFilter()}
-          />
+        <button
+          type="button"
+          data-testid="button-search"
+          disabled={!name}
+          onClick={() => handleFilter()}
+        >
+          <i className="fa-solid fa-magnifying-glass" />
         </button>
       </Styles.Search>
       {searching ? (
-        <Styles.Clear type="button" onClick={() => clearFilter()}>
+        <Styles.Clear
+          type="button"
+          onClick={() => clearFilter()}
+          data-testid="button-clear"
+        >
           Limpar Filtro
         </Styles.Clear>
       ) : null}

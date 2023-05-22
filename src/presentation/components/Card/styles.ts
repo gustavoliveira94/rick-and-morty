@@ -11,6 +11,11 @@ export const Card = styled.div`
   color: #712512;
   margin-right: 20px;
 
+  @media (max-width: 600px) {
+    width: auto;
+    margin-right: 0;
+  }
+
   i {
     position: absolute;
     right: 15px;

@@ -12,7 +12,6 @@ import { graphql } from 'config/graphql';
 
 import { useDispatch } from './useDispatch';
 import { useSelector } from './useSelector';
-
 import { useLazyQuery } from './useLazyQuery';
 
 const CHARACTERS_QUERY = graphql`

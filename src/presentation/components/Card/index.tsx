@@ -23,14 +23,22 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const favorite = () => {
     return isFavorite ? (
-      <i className="fa-solid fa-heart" onClick={() => setFavorite()} />
+      <i
+        className="fa-solid fa-heart"
+        data-testid="is-favorite"
+        onClick={() => setFavorite()}
+      />
     ) : (
-      <i className="fa-regular fa-heart" onClick={() => setFavorite()} />
+      <i
+        className="fa-regular fa-heart"
+        data-testid="is-not-favorite"
+        onClick={() => setFavorite()}
+      />
     );
   };
 
   return (
-    <Styles.Card>
+    <Styles.Card data-testid="character">
       <img src={image} alt="character" loading="lazy" />
       {favorite()}
       <Styles.Infos>

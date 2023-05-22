@@ -20,24 +20,38 @@ export const Pagination: React.FC<PaginationProps> = ({
   return (
     <Styles.Container>
       {newPrev ? (
-        <Styles.Pagination onClick={() => setPage({ page: 1 })}>
+        <Styles.Pagination
+          onClick={() => setPage({ page: 1 })}
+          data-testid="initial-page"
+        >
           1
         </Styles.Pagination>
       ) : null}
       <Styles.Pagination
         onClick={() => setPage({ page: !prev ? 1 : prev })}
         current={!prev}
+        data-testid="prev"
       >
         {!prev ? 1 : prev}
       </Styles.Pagination>
-      {prev ? <Styles.Pagination current>{current}</Styles.Pagination> : null}
+      {prev ? (
+        <Styles.Pagination current data-testid="current">
+          {current}
+        </Styles.Pagination>
+      ) : null}
       {next ? (
-        <Styles.Pagination onClick={() => setPage({ page: next })}>
+        <Styles.Pagination
+          onClick={() => setPage({ page: next })}
+          data-testid="next"
+        >
           {next}
         </Styles.Pagination>
       ) : null}
       {newPages ? (
-        <Styles.Pagination onClick={() => setPage({ page: pages! })}>
+        <Styles.Pagination
+          onClick={() => setPage({ page: pages! })}
+          data-testid="end-page"
+        >
           {pages}
         </Styles.Pagination>
       ) : null}

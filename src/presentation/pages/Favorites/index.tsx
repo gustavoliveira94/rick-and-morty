@@ -2,11 +2,13 @@ import { Card } from 'presentation/components/Card';
 
 import { useGetFavoriteCharacters } from 'core/hooks/useGetFavoriteCharacters';
 import { useSetFavoriteCharacter } from 'core/hooks/useSetFavoriteCharacter';
+import { isFavorite } from 'core/utils/isFavorite';
 
 import * as Styles from './styles';
 
 export const Favorites: React.FC = () => {
   const { data: characters, loading } = useGetFavoriteCharacters();
+
   const { favoriteCharacters, setFavoriteCharacter } =
     useSetFavoriteCharacter();
 
@@ -15,10 +17,6 @@ export const Favorites: React.FC = () => {
       {loading
         ? 'Loading...'
         : characters?.map(({ image, name, id, species, gender, status }) => {
-            const isFavorite = favoriteCharacters?.some(
-              (favorite) => favorite === id,
-            );
-
             return (
               <Card
                 key={id}
@@ -27,7 +25,7 @@ export const Favorites: React.FC = () => {
                 species={species}
                 gender={gender}
                 status={status}
-                isFavorite={isFavorite}
+                isFavorite={isFavorite({ favoriteCharacters, id })}
                 setFavorite={() => setFavoriteCharacter(id)}
               />
             );
