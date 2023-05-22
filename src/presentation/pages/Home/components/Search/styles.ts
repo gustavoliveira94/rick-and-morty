@@ -22,6 +22,7 @@ export const Search = styled.div`
     height: 50px;
     border: 0;
     background-color: transparent;
+    font-family: Creepster, cursive;
 
     @media (max-width: 600px) {
       width: 280px;
