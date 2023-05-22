@@ -37,7 +37,7 @@ export const Favorites: React.FC = () => {
         })
       )}
 
-      {!hasNotFavorites ? (
+      {hasNotFavorites ? (
         <NotFound text="You don't have favorite characters" />
       ) : null}
     </Styles.List>
