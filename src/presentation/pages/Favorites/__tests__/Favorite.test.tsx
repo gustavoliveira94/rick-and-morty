@@ -45,8 +45,8 @@ describe('Testing <Favorites /> Page', () => {
     charactersData = [];
     loading = true;
 
-    const { getByText } = render(<Favorites />);
+    const { getByTestId } = render(<Favorites />);
 
-    expect(getByText('Loading...')).toBeInTheDocument();
+    expect(getByTestId('loading')).toBeInTheDocument();
   });
 });
