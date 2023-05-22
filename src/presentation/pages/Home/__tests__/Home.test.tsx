@@ -45,8 +45,8 @@ describe('Testing <Home /> Page', () => {
     charactersData = [];
     loading = true;
 
-    const { getByText } = render(<Home />);
+    const { getByTestId } = render(<Home />);
 
-    expect(getByText('Loading...')).toBeInTheDocument();
+    expect(getByTestId('loading')).toBeInTheDocument();
   });
 });

@@ -1,4 +1,6 @@
-import { Card, Pagination } from 'presentation/components';
+import { BounceLoader } from 'react-spinners';
+
+import { Card, Pagination, NotFound } from 'presentation/components';
 import { Search } from 'presentation/pages/Home/components/Search';
 
 import { useCharacters } from 'core/hooks/useCharacters';
@@ -19,28 +21,34 @@ export const Home: React.FC = () => {
   const { favoriteCharacters, setFavoriteCharacter } =
     useSetFavoriteCharacter();
 
+  const hasNotSearch = !loading && !characters.length;
+
   return (
     <>
       <Search setFilter={handleFilterName} />
       <Styles.List>
-        {loading
-          ? 'Loading...'
-          : characters?.map(({ image, name, id, species, gender, status }) => {
-              return (
-                <Card
-                  key={id}
-                  image={image}
-                  name={name}
-                  species={species}
-                  gender={gender}
-                  status={status}
-                  isFavorite={isFavorite({ favoriteCharacters, id })}
-                  setFavorite={() => setFavoriteCharacter(id)}
-                />
-              );
-            })}
+        {loading ? (
+          <BounceLoader data-testid="loading" color="#712512" />
+        ) : (
+          characters.map(({ image, name, id, species, gender, status }) => {
+            return (
+              <Card
+                key={id}
+                image={image}
+                name={name}
+                species={species}
+                gender={gender}
+                status={status}
+                isFavorite={isFavorite({ favoriteCharacters, id })}
+                setFavorite={() => setFavoriteCharacter(id)}
+              />
+            );
+          })
+        )}
+
+        {hasNotSearch ? <NotFound text="Character not found!" /> : null}
       </Styles.List>
-      {!loading ? (
+      {!loading && characters.length ? (
         <Pagination
           setPage={handlePagination}
           pages={pagination?.pages}
