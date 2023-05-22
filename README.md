@@ -2,8 +2,7 @@
 
 ## Description
 
-App to see characters from Rick and Morty and add in your favorites: [Rick and Morty Api]([https://pokeapi.co/](https://rickandmortyapi.com/graphql)) <br />
-Project URL: [Projeto](https://pokemon-beta-teal.vercel.app/)
+App to see characters from Rick and Morty and add in your favorites: [Rick and Morty Api]([https://pokeapi.co/](https://rickandmortyapi.com/graphql))
 
 ## Running the app
 
