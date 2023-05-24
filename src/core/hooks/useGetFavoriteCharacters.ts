@@ -46,7 +46,10 @@ export const useGetFavoriteCharacters = () => {
   useEffect(() => {
     if (data?.charactersByIds) {
       dispatch(getFavoriteCharacter(data?.charactersByIds));
+      return;
     }
+
+    dispatch(getFavoriteCharacter([]));
   }, [data?.charactersByIds]);
 
   return {
