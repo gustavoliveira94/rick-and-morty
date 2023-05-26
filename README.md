@@ -16,7 +16,6 @@ App to see characters from Rick and Morty and add in your favorites: [Rick and M
 ## Running tests
 
 1. `npm run test` ou `yarn test` - Roda os testes unitários com coverage
-2. `npm run cypress` ou `yarn cypress` - Roda o teste EndToEnd
 
 ## Main dependencies
 
